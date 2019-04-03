@@ -54,6 +54,6 @@ blocks:
       - name: Executing Python 3 scripts
         commands:
           - checkout
-          - chmod 644 py1.py py2.py
+          - chmod 755 py1.py py2.py
           - ./py1.py
           - ./py2.py .
