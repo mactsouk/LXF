@@ -6,17 +6,34 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: "Build"
+  - name: Inspect environment
     task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
       jobs:
       - name: Inspecting VM
         commands:
+          - uname -a 
+          - df
+          - free
+          - gcc  -v
+          - python3 -V
+
+  - name: Second task
+    task:
+      jobs:
+      - name: Checking out
+        commands:
+          - pwd 
           - checkout
-          - ls -1
-          - echo $APP_ENV
-          - echo "Docker build..."
-          - echo "done"
+          - pwd
+          - ls -l
+
+  - name: Using a secret
+    task:
+      jobs:
+      - name: Printing secret values
+        commands:
+          - echo $ISSUE
+          - echo $PAGES
+      secrets:
+        - name: lxf-secret
 
