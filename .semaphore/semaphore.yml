@@ -74,7 +74,6 @@ blocks:
       - name: Test Web Server
         commands:
           - checkout
-          - sem-version go 1.12
           - cache restore $(checksum webServer.go)
           - ./bin/webServer 8001 &
           - curl --silent localhost:8001/time | grep "The current time is"
