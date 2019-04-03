@@ -57,3 +57,25 @@ blocks:
           - chmod 755 py1.py py2.py
           - ./py1.py
           - ./py2.py .
+
+  - name: Go project
+    task:
+      jobs:
+      - name: Get Go packages
+        commands:
+          - checkout
+          - sem-version go 1.12
+          - go get github.com/lib/pq
+          - go build webServer.go
+          - mkdir bin
+          - mv webServer bin
+          - cache store $(checksum webServer.go) bin
+
+      - name: Test Web Server
+        commands:
+          - checkout
+          - sem-version go 1.12
+          - cache restore $(checksum webServer.go)
+          - ./bin/webServer 8001 &
+          - curl --silent localhost:8001/time | grep "The current time is"
+
