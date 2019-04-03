@@ -1,0 +1,15 @@
+version: v1.0
+name: Pipeline 1 - p1.yml
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Environment variable
+    task:
+      jobs:
+      - name: SEMAPHORE_PIPELINE_ID 
+        commands:
+          - echo $SEMAPHORE_PIPELINE_ID
+

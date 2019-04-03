@@ -5,6 +5,17 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
+promotions:
+- name: Staging
+  pipeline_file: p1.yml
+  auto_promote_on:
+    - result: passed
+      branch:
+        - "master"
+
+- name: prod
+  pipeline_file: p2.yml
+
 blocks:
   - name: Inspect environment
     task:
@@ -25,7 +36,7 @@ blocks:
           - pwd 
           - checkout
           - pwd
-          - ls -l
+          - ls -al
 
   - name: Using a secret
     task:

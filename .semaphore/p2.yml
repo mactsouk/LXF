@@ -1,0 +1,16 @@
+version: v1.0
+name: This is Pipeline 2
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: List VM Linux version
+    task:
+      jobs:
+      - name: uname
+        commands:
+          - echo $SEMAPHORE_PIPELINE_ID
+          - uname -a
+
